@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-export default class App extends React.Component {
+export default class SignIn extends React.Component {
   state = {
     email: '',
     password: '',
@@ -39,11 +39,17 @@ export default class App extends React.Component {
         <TouchableOpacity>
           <Text style={styles.forgot}>Forgot Password?</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.loginBtn}>
+        <TouchableOpacity
+          style={styles.loginBtn}
+          onPress={() => this.props.navigation.navigate('Home')}>
           <Text style={styles.loginText}>LOGIN</Text>
         </TouchableOpacity>
         <TouchableOpacity>
-          <Text style={styles.loginText}>Signup</Text>
+          <Text
+            style={styles.loginText}
+            onPress={() => this.props.navigation.navigate('SignUp')}>
+            Signup
+          </Text>
         </TouchableOpacity>
       </View>
     );
