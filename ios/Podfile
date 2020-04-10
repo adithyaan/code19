@@ -81,6 +81,8 @@ target 'covid19' do
 
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
+  pod 'react-native-safe-area-context', :path => '../node_modules/react-native-safe-area-context'
+
   target 'covid19Tests' do
     inherit! :complete
     # Pods for testing
