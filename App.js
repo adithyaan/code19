@@ -1,18 +1,27 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, StatusBar,Text} from 'react-native';
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
-import { createStackNavigator } from "react-navigation-stack";
+import {createStackNavigator} from 'react-navigation-stack';
 import { createDrawerNavigator } from "react-navigation-drawer";
+import signUp from './components/signup/signUp';
+import signIn from './components/signin/signIn';
+import Home from './components/home/home';
 
-const App: () => React$Node = () => {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <Text>test</Text>
-      <SafeAreaView />
-    </>
-  );
-};
+const drawerNavigator = createDrawerNavigator({
+  Home: { screen: Home },
+});
+
+const AuthNavigator = createStackNavigator(
+  {
+    SignUp: signUp,
+    signIn: {screen: signIn, navigationOptions: {header: null}},
+    Home: drawerNavigator,
+  },
+  {
+    initialRouteName: 'Home',
+  }
+);
+
+const App = createAppContainer(AuthNavigator);
 
 
 export default App;
