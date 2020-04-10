@@ -14,11 +14,28 @@ import 'react-native-gesture-handler';
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
+const HomeNavigator = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Products"
+        component={Products}
+        options={{headerShown: false}}
+      />
+    </Stack.Navigator>
+  );
+};
+
 const App = () => {
   return (
     <>
       <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={Home} />
+        <Drawer.Screen name="Home" component={HomeNavigator} />
         <Drawer.Screen name="Your Orders" component={Home} />
         <Drawer.Screen name="Local Traders" component={Home} />
         <Drawer.Screen name="Covid19 Tracker" component={Home} />

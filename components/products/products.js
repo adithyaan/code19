@@ -8,6 +8,6 @@ export default class Products extends React.Component {
   data = [{}, {}, {}, {}];
 
   render() {
-    return <ProductsList products={data} />;
+    return <ProductsList products={this.data} />;
   }
 }
