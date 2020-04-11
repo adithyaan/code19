@@ -17,8 +17,9 @@ class WUList extends React.Component {
     this.setState({dialogVisible: true});
   };
 
-  confirmAdd = () => {
+  confirmAdd = (item) => {
     this.setState({dialogVisible: false});
+    this.props.addItem(item);
   };
 
   renderProducts = (products) => {
@@ -50,7 +51,7 @@ class WUList extends React.Component {
                 Please Specify the quantity to be added
               </Dialog.Description>
               <Dialog.Input style={styles.input} placeholder="quantity" />
-              <Dialog.Button label="Add" onPress={this.confirmAdd} />
+              <Dialog.Button label="Add" onPress={this.confirmAdd(item)} />
             </Dialog.Container>
           </View>
         </Card>
@@ -109,7 +110,7 @@ class WUList extends React.Component {
 
   render() {
     const {products, orders, isProduct, isOrder} = this.props;
-
+    console.log(this.props);
     return (
       <View>
         {isProduct ? this.renderProducts(products) : null}
@@ -165,7 +166,7 @@ const styles = StyleSheet.create({
 });
 function mapDispatchToProps(dispatch) {
   return {
-    ADD_ITEM: (data) => dispatch(data),
+    addItem: (data) => dispatch(data),
   };
 }
-export default connect(mapDispatchToProps)(WUList);
+export default connect(null, mapDispatchToProps)(WUList);
