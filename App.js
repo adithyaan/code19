@@ -40,11 +40,11 @@ const App = () => {
         <Drawer.Screen name="Approved Orders" component={Home} />
         <Drawer.Screen name="Feedback" component={Products} />
         <Drawer.Screen name="Orders" component={Orders} />
-
       </Drawer.Navigator>
     </>
   );
 };
+
 const StackNavigator = () => {
   return (
     <NavigationContainer>

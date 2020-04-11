@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, View, Card, Fab, Icon} from 'native-base';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import Header from '../header/header';
 
 export default class Home extends React.Component {
@@ -16,12 +16,13 @@ export default class Home extends React.Component {
           Stay Safe and Maintain Social Distancing
         </Text>
         <View style={styles.row}>
-          <Card
-            style={styles.card}
+          <TouchableOpacity
             onPress={() => {
               this.props.navigation.navigate('Products');
-            }}
-          />
+            }}>
+            <Card style={styles.card} />
+          </TouchableOpacity>
+
           <Card style={styles.card} />
         </View>
         <View style={styles.row}>
