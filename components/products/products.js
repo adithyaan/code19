@@ -2,9 +2,8 @@ import React from 'react';
 import ProductsList from '../../fragments/WUList/wUlist';
 import Header from '../header/header';
 import {View} from 'react-native';
-import { connect } from "react-redux";
 
- class Products extends React.Component {
+ export default class Products extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -35,9 +34,4 @@ import { connect } from "react-redux";
     );
   }
 }
-function mapDispatchToProps(dispatch) {
-  return {
-    ADD_ITEM: (data) => dispatch(data),
-  };
-}
-export default connect(mapDispatchToProps)(Products);
+

@@ -3,8 +3,9 @@ import React from 'react';
 import {Card, Icon, Text, Button} from 'native-base';
 import {Image, View, StyleSheet} from 'react-native';
 import Dialog from 'react-native-dialog';
+import {connect} from 'react-redux';
 
-export default class WUList extends React.Component {
+class WUList extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -95,7 +96,7 @@ export default class WUList extends React.Component {
             <Dialog.Container visible={this.state.dialogVisible}>
               <Dialog.Title>Bid</Dialog.Title>
               <Dialog.Description>
-                Please Specify the Amount to  Bid
+                Please Specify the Amount to Bid
               </Dialog.Description>
               <Dialog.Input style={styles.input} placeholder="quantity" />
               <Dialog.Button label=" Add Bid" onPress={this.confirmAdd} />
@@ -104,7 +105,7 @@ export default class WUList extends React.Component {
         </Card>
       );
     });
-  }
+  };
 
   render() {
     const {products, orders, isProduct, isOrder} = this.props;
@@ -150,15 +151,21 @@ const styles = StyleSheet.create({
   input: {
     borderColor: 'black',
   },
-  currentBid:{
+  currentBid: {
     color: 'red',
     fontStyle: 'normal',
     fontSize: 15,
     marginBottom: 0,
     width: 100,
-    marginTop:10
+    marginTop: 10,
   },
-  addBid:{
-    height:30
-  }
+  addBid: {
+    height: 30,
+  },
 });
+function mapDispatchToProps(dispatch) {
+  return {
+    ADD_ITEM: (data) => dispatch(data),
+  };
+}
+export default connect(mapDispatchToProps)(WUList);
