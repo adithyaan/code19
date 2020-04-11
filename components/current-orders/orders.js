@@ -13,7 +13,7 @@ export default class Products extends React.Component {
     return (
       <View>
         <Header props={this.props} />
-        <ProductsList products={this.data} isProduct />
+        <ProductsList orders={this.data} isOrder />
       </View>
     );
   }

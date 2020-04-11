@@ -28,7 +28,11 @@ export default class Home extends React.Component {
           <Card style={styles.card} />
           <Card style={styles.card} />
         </View>
-        <Card style={styles.messageContainer}>
+        <Card
+          style={styles.messageContainer}
+          onPress={() => {
+            this.props.navigation.navigate('Products');
+          }}>
           <Text>
             Let us Know Your needs..! We will serve you at your door step
           </Text>
