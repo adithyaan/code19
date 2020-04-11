@@ -2,12 +2,29 @@ import React from 'react';
 import ProductsList from '../../fragments/WUList/wUlist';
 import Header from '../header/header';
 import {View} from 'react-native';
+import { connect } from "react-redux";
 
-export default class Products extends React.Component {
+ class Products extends React.Component {
   constructor(props) {
     super(props);
   }
-  data = [{}, {}, {}, {}, {}, {}];
+  data = [
+    {
+      name: 'Grapes',
+    },
+    {
+      name: 'Apple',
+    },
+    {
+      name: 'Guava',
+    },
+    {
+      name: 'Chickoo',
+    },
+    {
+      name: 'JackFruit',
+    },
+  ];
 
   render() {
     return (
@@ -18,3 +35,9 @@ export default class Products extends React.Component {
     );
   }
 }
+function mapDispatchToProps(dispatch) {
+  return {
+    ADD_ITEM: (data) => dispatch(data),
+  };
+}
+export default connect(mapDispatchToProps)(Products);
