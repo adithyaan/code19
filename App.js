@@ -10,6 +10,9 @@ import signIn from './components/signin/signIn';
 import Home from './components/home/home';
 import Products from './components/products/products';
 import Tracker from './components/covid19tracker/tracker';
+import MyCart from './components/mycart/mycart';
+
+
 import 'react-native-gesture-handler';
 
 const Drawer = createDrawerNavigator();
@@ -23,7 +26,11 @@ const HomeNavigator = () => {
         component={Home}
         options={{headerShown: false}}
       />
-      <Stack.Screen name="Products" component={Products} />
+      <Stack.Screen
+        name="Products"
+        component={Products}
+        options={{headerShown: false}}
+      />
     </Stack.Navigator>
   );
 };
@@ -40,6 +47,7 @@ const App = () => {
         <Drawer.Screen name="Approved Orders" component={Home} />
         <Drawer.Screen name="Feedback" component={Products} />
         <Drawer.Screen name="Orders" component={Orders} />
+        <Drawer.Screen name="MyCart" component={MyCart} />
       </Drawer.Navigator>
     </>
   );

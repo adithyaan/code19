@@ -19,7 +19,7 @@ class WUList extends React.Component {
 
   confirmAdd = (item) => {
     this.setState({dialogVisible: false});
-    this.props.addItem(item);
+    this.props.addItem({type: 'ADD_DATA', item: item});
   };
 
   renderProducts = (products) => {
@@ -51,7 +51,7 @@ class WUList extends React.Component {
                 Please Specify the quantity to be added
               </Dialog.Description>
               <Dialog.Input style={styles.input} placeholder="quantity" />
-              <Dialog.Button label="Add" onPress={this.confirmAdd(item)} />
+              <Dialog.Button label="Add" onPress={()=>this.confirmAdd(item)} />
             </Dialog.Container>
           </View>
         </Card>

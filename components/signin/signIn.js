@@ -6,6 +6,8 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
+import {Toast} from 'native-base';
+import Config from '../../assets/config/config';
 
 export default class SignIn extends React.Component {
   state = {
@@ -22,7 +24,7 @@ export default class SignIn extends React.Component {
         <View style={styles.inputView}>
           <TextInput
             style={styles.inputText}
-            placeholder="Email..."
+            placeholder="Email"
             placeholderTextColor="#003f5c"
             onChangeText={(text) => this.setState({email: text})}
           />
@@ -31,7 +33,7 @@ export default class SignIn extends React.Component {
           <TextInput
             secureTextEntry
             style={styles.inputText}
-            placeholder="Password..."
+            placeholder="Password."
             placeholderTextColor="#003f5c"
             onChangeText={(text) => this.setState({password: text})}
           />
@@ -39,9 +41,7 @@ export default class SignIn extends React.Component {
         <TouchableOpacity>
           <Text style={styles.forgot}>Forgot Password?</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.loginBtn}
-          onPress={() => this.props.navigation.navigate('Home')}>
+        <TouchableOpacity style={styles.loginBtn} onPress={() => this.signIn()}>
           <Text style={styles.loginText}>LOGIN</Text>
         </TouchableOpacity>
         <TouchableOpacity>
@@ -54,6 +54,30 @@ export default class SignIn extends React.Component {
       </View>
     );
   }
+  signIn = () => {
+    let formData = new FormData();
+    formData.append('email', this.state.email);
+    formData.append('pwd', this.state.password);
+    const promise = fetch(Config.signInApi, {
+      method: 'POST',
+      body: formData,
+    });
+    promise
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
+      .then((response) => {
+        if (response.error === 'false') {
+          this.props.navigation.navigate('Home');
+        } else {
+          Toast.show({
+            text: response.message,
+            buttonText: 'Okay',
+          });
+        }
+      });
+  };
 }
 
 const styles = StyleSheet.create({
