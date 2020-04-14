@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, View, Card, Fab, Icon} from 'native-base';
-import {StyleSheet, TouchableOpacity} from 'react-native';
+import {StyleSheet, TouchableOpacity, Image} from 'react-native';
 import Header from '../header/header';
 
 export default class Home extends React.Component {
@@ -11,7 +11,12 @@ export default class Home extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <Image
+          style={styles.backgroundImage}
+          source={require('../../assets/images/background.png')}
+        />
         <Header props={this.props} />
+
         <Text style={styles.title}>
           Stay Safe and Maintain Social Distancing
         </Text>
@@ -20,14 +25,49 @@ export default class Home extends React.Component {
             onPress={() => {
               this.props.navigation.navigate('Products');
             }}>
-            <Card style={styles.card} />
+            <Card style={styles.card}>
+              <Image
+                style={styles.image}
+                source={require('../../assets/images/vegetables.png')}
+              />
+            </Card>
           </TouchableOpacity>
 
-          <Card style={styles.card} />
+          <TouchableOpacity
+            onPress={() => {
+              this.props.navigation.navigate('Products');
+            }}>
+            <Card style={styles.card}>
+              <Image
+                style={styles.image}
+                source={require('../../assets/images/fruits.png')}
+              />
+            </Card>
+          </TouchableOpacity>
         </View>
         <View style={styles.row}>
-          <Card style={styles.card} />
-          <Card style={styles.card} />
+          <TouchableOpacity
+            onPress={() => {
+              this.props.navigation.navigate('Products');
+            }}>
+            <Card style={styles.card}>
+              <Image
+                style={styles.image}
+                source={require('../../assets/images/medicine.png')}
+              />
+            </Card>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              this.props.navigation.navigate('Products');
+            }}>
+            <Card style={styles.card}>
+              <Image
+                style={styles.image}
+                source={require('../../assets/images/groceries.png')}
+              />
+            </Card>
+          </TouchableOpacity>
         </View>
         <Card
           style={styles.messageContainer}
@@ -74,5 +114,16 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
+  },
+  image: {
+    height: 180,
+    width: 180,
+  },
+  backgroundImage: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
   },
 });

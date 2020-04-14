@@ -4,8 +4,12 @@ import {Card, Icon, Text, Button} from 'native-base';
 import {Image, View, StyleSheet} from 'react-native';
 import Dialog from 'react-native-dialog';
 import {connect} from 'react-redux';
+import AsyncStorage from '@react-native-community/async-storage';
+import CountDown from 'react-native-countdown-component';
 
 class WUList extends React.Component {
+  cartItems = [];
+
   constructor(props) {
     super(props);
   }
@@ -20,6 +24,17 @@ class WUList extends React.Component {
   confirmAdd = (item) => {
     this.setState({dialogVisible: false});
     this.props.addItem({type: 'ADD_DATA', item: item});
+    this.storeData(item);
+  };
+
+  storeData = async (item) => {
+    this.cartItems.push(item);
+    try {
+      await AsyncStorage.setItem('cartItems', JSON.stringify(this.cartItems));
+      console.log(this.cartItems);
+    } catch (e) {
+      // saving error
+    }
   };
 
   renderProducts = (products) => {
@@ -51,7 +66,10 @@ class WUList extends React.Component {
                 Please Specify the quantity to be added
               </Dialog.Description>
               <Dialog.Input style={styles.input} placeholder="quantity" />
-              <Dialog.Button label="Add" onPress={()=>this.confirmAdd(item)} />
+              <Dialog.Button
+                label="Add"
+                onPress={() => this.confirmAdd(item)}
+              />
             </Dialog.Container>
           </View>
         </Card>
@@ -86,11 +104,12 @@ class WUList extends React.Component {
                 onPress={() => this.showDialog(item)}>
                 Current Bid is 500 Rupes
               </Text>
-              <Text
-                style={styles.currentBid}
-                onPress={() => this.showDialog(item)}>
-                Ends in 10 minutes
-              </Text>
+              <CountDown
+                until={60 * 10 + 30}
+                onFinish={() => alert('finished')}
+                onPress={() => alert('hello')}
+                size={15}
+              />
             </View>
           </View>
           <View>
@@ -164,9 +183,16 @@ const styles = StyleSheet.create({
     height: 30,
   },
 });
+const mapStateToProps = (state) => {
+  alert(JSON.stringify(state));
+  const {check_box} = state.cartReducer;
+  return {
+    cartItems: check_box,
+  };
+};
 function mapDispatchToProps(dispatch) {
   return {
     addItem: (data) => dispatch(data),
   };
 }
-export default connect(null, mapDispatchToProps)(WUList);
+export default connect(mapStateToProps, mapDispatchToProps)(WUList);

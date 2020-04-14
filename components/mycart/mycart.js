@@ -1,12 +1,25 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {Card, Icon, Text, Button} from 'native-base';
 import {Image, View, StyleSheet} from 'react-native';
 import Header from '../header/header';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default class MyCart extends React.Component {
   constructor(props) {
     super(props);
   }
+  cartItems = [];
+
+  componentDidMount() {}
+
+  loadData = () => {
+    const existingProducts = AsyncStorage.getItem('cartItems').then((res) =>{
+      alert(JSON.stringify(res));
+      this.cartItems = existingProducts;
+    });
+  };
+
   data = [
     {
       name: 'Grapes',
@@ -25,10 +38,12 @@ export default class MyCart extends React.Component {
     },
   ];
   render() {
+    this.loadData();
+
     return (
       <>
         <Header props={this.props} />
-        {this.data.map((item) => {
+        {this.cartItems.map((item) => {
           return (
             <Card style={styles.card}>
               <View style={styles.row}>

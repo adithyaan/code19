@@ -83,6 +83,8 @@ target 'covid19' do
 
   pod 'react-native-safe-area-context', :path => '../node_modules/react-native-safe-area-context'
 
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
   target 'covid19Tests' do
     inherit! :complete
     # Pods for testing
